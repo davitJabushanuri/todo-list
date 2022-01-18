@@ -16,12 +16,13 @@ const todoContainer = [
 
 const saveData = (e) => {
 	e.preventDefault();
-	const newTodo = new todo(
-		title.value,
-		description.value,
-		date.value,
-		priority.value
-	);
+	const newTodo = {
+		title: title.value,
+		description: description.value,
+		date: date.value,
+		priority: priority.value,
+		id: new Date().valueOf().toString(),
+	};
 	todoContainer.push(newTodo);
 	console.log(todoContainer);
 	clearForm();
@@ -34,12 +35,25 @@ const clearForm = () => {
 	form.reset();
 };
 
+const handleDelete = (e) => {
+	const parent = e.target.closest('.todo');
+
+	todoContainer.some((todo) => {
+		if (parent.id === todo.id) {
+			let x = todoContainer.indexOf(todo);
+			todoContainer.splice(x, 1);
+		}
+	});
+	displayTodo();
+};
+
 const displayTodo = () => {
 	todoList.innerHTML = '';
 
 	todoContainer.forEach((todoItem) => {
 		const todo = document.createElement('div');
 		todo.classList.add('todo');
+		todo.setAttribute('id', todoItem.id);
 
 		const checked = document.createElement('input');
 		checked.setAttribute('type', 'checkbox');
@@ -54,15 +68,17 @@ const displayTodo = () => {
 		todo.appendChild(todoDescription);
 
 		const todoDate = document.createElement('p');
-		todoDate.textContent = todoItem.date;
+		todoDate.textContent = `Due date: ${todoItem.date}`;
 		todo.appendChild(todoDate);
 
 		const todoPriority = document.createElement('p');
-		todoPriority.textContent = todoItem.priority;
+		todoPriority.textContent = `Priority: ${todoItem.priority}`;
 		todo.appendChild(todoPriority);
 
 		const deleteTodo = document.createElement('button');
 		deleteTodo.textContent = 'Delete';
+		deleteTodo.classList.add('delete-button');
+		deleteTodo.addEventListener('click', handleDelete);
 		todo.appendChild(deleteTodo);
 
 		todoList.appendChild(todo);
@@ -71,11 +87,11 @@ const displayTodo = () => {
 
 displayTodo();
 
-function todo(title, description, date, priority) {
-	this.title = title;
-	this.description = description;
-	this.date = date;
-	this.priority = priority;
-}
+// function todo(title, description, date, priority) {
+// 	this.title = title;
+// 	this.description = description;
+// 	this.date = date;
+// 	this.priority = priority;
+// }
 
 form.addEventListener('submit', saveData);
