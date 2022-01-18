@@ -3,7 +3,8 @@ const submitButton = document.querySelector('input[type=submit]');
 const title = document.querySelector('#title');
 const description = document.querySelector('#description');
 const date = document.querySelector('#date');
-const checklist = document.querySelector('#checklist');
+const priority = document.querySelector('#priority');
+const todoList = document.querySelector('.todo-list');
 
 const todoContainer = [];
 
@@ -13,26 +14,60 @@ const saveData = (e) => {
 		title.value,
 		description.value,
 		date.value,
-		checklist.value
+		priority.value
 	);
 	todoContainer.push(newTodo);
 	console.log(todoContainer);
 	clearForm();
+	displayTodo();
 };
 
-const formValidation = () => {
-	if (title.value.length === 0) alert('hello');
-};
+const formValidation = () => {};
 
 const clearForm = () => {
 	form.reset();
 };
 
-function todo(title, description, date, checklist) {
+const displayTodo = () => {
+	todoList.innerHTML = '';
+
+	todoContainer.forEach((todoItem) => {
+		const todo = document.createElement('div');
+		todo.classList.add('todo');
+
+		const todoTitle = document.createElement('h1');
+		todoTitle.textContent = todoItem.title;
+		todo.appendChild(todoTitle);
+
+		const todoDescription = document.createElement('p');
+		todoDescription.textContent = todoItem.description;
+		todo.appendChild(todoDescription);
+
+		const todoDate = document.createElement('p');
+		todoDate.textContent = todoItem.date;
+		todo.appendChild(todoDate);
+
+		const todoPriority = document.createElement('p');
+		todoPriority.textContent = todoItem.priority;
+		todo.appendChild(todoPriority);
+
+		const checked = document.createElement('input');
+		checked.setAttribute('type', 'checkbox');
+		todo.appendChild(checked);
+
+		const deleteTodo = document.createElement('button');
+		deleteTodo.textContent = 'Delete';
+		todo.appendChild(deleteTodo);
+
+		todoList.appendChild(todo);
+	});
+};
+
+function todo(title, description, date, priority) {
 	this.title = title;
 	this.description = description;
 	this.date = date;
-	this.checklist = checklist;
+	this.priority = priority;
 }
 
-submitButton.addEventListener('click', saveData);
+form.addEventListener('submit', saveData);
