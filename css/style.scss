@@ -7,10 +7,46 @@
 body {
 	font-family: monospace;
 	min-height: 100vh;
+	background-color: #fcfcfd;
+	font-family: monospace;
+}
+
+nav {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-top: 2rem;
+	font-weight: 700;
+	font-size: 2rem;
+	color: #694ed6;
+}
+
+section {
+	display: flex;
+	gap: 2rem;
+	padding: 2rem;
+	justify-content: center;
+}
+
+.todo-list {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px 0px;
+	background-color: #fff;
+	border-radius: 4px;
+	padding: 1rem 2rem;
+}
+
+.form-container {
+	background-color: #fff;
+	border-radius: 4px;
+	padding: 4rem 3rem;
+	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px 0px;
+	width: 350px;
 }
 
 form {
-	max-width: 300px;
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
@@ -18,5 +54,39 @@ form {
 	input {
 		padding: 6px 12px;
 		font-size: 1rem;
+		border-radius: 4px;
+		font-size: 14px;
+		outline: none;
+		position: relative;
+		line-height: 20px;
+		padding: 0 16px;
+		height: 48px;
+		background-color: #fff;
+		border: 1px solid #babac4;
+		overflow: hidden;
+		transition: all 100ms ease-in-out;
+		&:focus {
+			border-color: #3c4fe0;
+		}
 	}
+
+	#submit {
+		background-color: #694ed6;
+		color: #fff;
+		font-weight: 500;
+		letter-spacing: 1.1px;
+		font-size: 16px;
+	}
+}
+
+.todo {
+	display: flex;
+	gap: 1rem;
+	min-width: 100px;
+	border-radius: 4px;
+	padding: 1rem;
+	background-color: #db6d28;
+	color: #ffff;
+	align-items: center;
+	justify-content: space-between;
 }

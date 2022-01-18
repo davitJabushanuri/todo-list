@@ -5,8 +5,14 @@ const description = document.querySelector('#description');
 const date = document.querySelector('#date');
 const priority = document.querySelector('#priority');
 const todoList = document.querySelector('.todo-list');
-
-const todoContainer = [];
+const todoContainer = [
+	{
+		title: 'take trash out',
+		description: 'after you wake up make sure you take the trash out',
+		date: 'tomorrow',
+		priority: 'high',
+	},
+];
 
 const saveData = (e) => {
 	e.preventDefault();
@@ -35,6 +41,10 @@ const displayTodo = () => {
 		const todo = document.createElement('div');
 		todo.classList.add('todo');
 
+		const checked = document.createElement('input');
+		checked.setAttribute('type', 'checkbox');
+		todo.appendChild(checked);
+
 		const todoTitle = document.createElement('h1');
 		todoTitle.textContent = todoItem.title;
 		todo.appendChild(todoTitle);
@@ -51,10 +61,6 @@ const displayTodo = () => {
 		todoPriority.textContent = todoItem.priority;
 		todo.appendChild(todoPriority);
 
-		const checked = document.createElement('input');
-		checked.setAttribute('type', 'checkbox');
-		todo.appendChild(checked);
-
 		const deleteTodo = document.createElement('button');
 		deleteTodo.textContent = 'Delete';
 		todo.appendChild(deleteTodo);
@@ -62,6 +68,8 @@ const displayTodo = () => {
 		todoList.appendChild(todo);
 	});
 };
+
+displayTodo();
 
 function todo(title, description, date, priority) {
 	this.title = title;

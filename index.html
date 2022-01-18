@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="css/style.css" />
-		<script defer src="./js/index.js"></script>
+		<script defer type="module" src="./js/index.js"></script>
 		<title>Todo List</title>
 	</head>
 	<body>
@@ -25,7 +25,7 @@
 						/>
 						<input required type="date" id="date" placeholder="dueDate" />
 						<input required type="text" id="priority" placeholder="priority" />
-						<input type="submit" value="Add Todo" />
+						<input type="submit" id="submit" value="Add Todo" />
 					</form>
 				</div>
 				<div class="todo-list"></div>
