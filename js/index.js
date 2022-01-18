@@ -22,6 +22,7 @@ const saveData = (e) => {
 		date: date.value,
 		priority: priority.value,
 		id: new Date().valueOf().toString(),
+		checked: false,
 	};
 	todoContainer.push(newTodo);
 	console.log(todoContainer);
@@ -47,6 +48,28 @@ const handleDelete = (e) => {
 	displayTodo();
 };
 
+const handleCheck = (e) => {
+	const parent = e.target.closest('.todo');
+
+	if (e.target.checked) {
+		parent.classList.add('done-todo');
+		todoContainer.some((todo) => {
+			if (parent.id === todo.id) {
+				todo.checked = true;
+			}
+		});
+	} else {
+		parent.classList.remove('done-todo');
+		todoContainer.some((todo) => {
+			if (parent.id === todo.id) {
+				todo.checked = false;
+			}
+		});
+	}
+	console.log(todoContainer);
+	// displayTodo();
+};
+
 const displayTodo = () => {
 	todoList.innerHTML = '';
 
@@ -57,6 +80,7 @@ const displayTodo = () => {
 
 		const checked = document.createElement('input');
 		checked.setAttribute('type', 'checkbox');
+		checked.addEventListener('click', handleCheck);
 		todo.appendChild(checked);
 
 		const todoTitle = document.createElement('h1');
@@ -86,12 +110,5 @@ const displayTodo = () => {
 };
 
 displayTodo();
-
-// function todo(title, description, date, priority) {
-// 	this.title = title;
-// 	this.description = description;
-// 	this.date = date;
-// 	this.priority = priority;
-// }
 
 form.addEventListener('submit', saveData);

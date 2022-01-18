@@ -130,5 +130,14 @@ form #submit {
   border-radius: 4px;
   border: none;
   color: #fff;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: crimson;
+}
+
+.done-todo {
+  background-color: #200202;
 }
 /*# sourceMappingURL=style.css.map */
